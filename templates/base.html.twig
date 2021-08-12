@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        {# the CSS file lives at "public/css/style.css" #}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -15,11 +18,15 @@
     </head>
     <body>
         <header>
-            <a href="{{ path('product_index') }}">Products index</a>
-            <a href="{{ path('category_index') }}">Categories index</a>
-            <a href="{{ path('receipt_index') }}">Receipt index</a>
-            <a href="{{ path('manual_index') }}">Images index</a>
-        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('product_index') }}">Products index</a></li>
+                    <li><a href="{{ path('category_index') }}">Categories index</a></li>
+                    <li><a href="{{ path('receipt_index') }}">Receipt index</a></li>
+                    <li><a href="{{ path('manual_index') }}">Images index</a></li>
+                </ul>
+            </nav>
+        </header>
 
 <hr>
         {% block body %}{% endblock %}

@@ -1,0 +1,47 @@
+html * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: grey;
+}
+header, h1 {
+    padding: 2%;
+}
+
+a {
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+nav ul {
+    display: flex;
+    gap: 4%;
+}
+
+table {
+    margin: 2%;
+    border: 1px solid black;
+}
+td {
+    background-color: rgb(51, 111, 51);
+}
+th {
+    padding: 10px;
+    background-color: brown;
+}
+
+form>div {
+    width: 50vw;
+    border: 1px solid black;
+}
+form>div>div {
+    display: flex;
+}
+label {
+    width: 20vw;
+}
