@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Categories</th>
+                <th>Ref</th>
+                <th>Price</th>
+                <th>Advice</th>
+                <th>Purchase_date</th>
+                <th>Warranty_end_purchase</th>
+                <th>Manual</th>
+                <th>Receipt</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>
+                    <ul>
+                        {% for cat in product.category %}
+                            <li>{{ cat }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
+                <td>{{ product.ref }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.advice }}</td>
+                <td>{{ product.purchaseDate ? product.purchaseDate|date('Y-m-d') : '' }}</td>
+                <td>{{ product.warrantyEndPurchase ? product.warrantyEndPurchase|date('Y-m-d') : '' }}</td>
+                <td>{{ product.manual }}</td>
+                <td>{{ product.receipt }}</td>
+
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_new') }}">Create new</a>
+{% endblock %}

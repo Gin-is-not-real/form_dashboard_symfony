@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Receipt{% endblock %}
+
+{% block body %}
+    <h1>Create new Receipt</h1>
+
+    {{ include('receipt/_form.html.twig') }}
+
+    <a href="{{ path('receipt_index') }}">back to list</a>
+{% endblock %}

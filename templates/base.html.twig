@@ -14,6 +14,14 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <a href="{{ path('product_index') }}">Products index</a>
+            <a href="{{ path('category_index') }}">Categories index</a>
+            <a href="{{ path('receipt_index') }}">Receipt index</a>
+            <a href="{{ path('manual_index') }}">Images index</a>
+        <header>
+
+<hr>
         {% block body %}{% endblock %}
     </body>
 </html>
