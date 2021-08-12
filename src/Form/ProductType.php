@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -21,7 +23,12 @@ class ProductType extends AbstractType
             ->add('purchase_date')
             ->add('warranty_end_purchase')
             ->add('category')
-            ->add('manual')
+            // ->add('manual')
+            ->add('manual', FileType::class, [
+                // 'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('receipt')
         ;
     }

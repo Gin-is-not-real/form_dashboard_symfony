@@ -1,4 +1,19 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+
+    {# Si la route est "product_edit on affiche le manual #}
+    {% if app.request.attributes.get('_route') == 'product_edit' %}
+        {% if product.manual != null %}
+            <h2>Manual</h2>
+            <div>
+                <div>{{ product.manual.name }}</div>
+                <img src="{{ asset('/uploads/'~ product.manual.name) }}" alt="" width="150">
+                {# lien pour supprimer le manual (sera géré en Ajax) #}
+                <a href="{{ path('product_delete_manual', {id: product.manual.id})}}" data-delete data-token="{{ csrf_token('delete' ~ product.manual.id ) }}">Delete</a>
+            </div>
+        {% endif %}
+    
+    {% endif %}
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

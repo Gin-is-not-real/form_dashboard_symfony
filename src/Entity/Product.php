@@ -69,6 +69,10 @@ class Product
         $this->category = new ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -181,6 +185,10 @@ class Product
 
         return $this;
     }
+
+    // public function addManual(Manual $manual): self {
+    //     return $this;
+    // }
 
     public function getReceipt(): ?Receipt
     {
