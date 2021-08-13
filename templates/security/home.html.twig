@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# the CSS file lives at "public/css/style.css" #}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+    </head>
+
+<body>
+
+
+<div>
+    <h1>Hello  ! </h1>
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    {% if app.user == null %}
+        <div><a href="{{ path('app_login') }}">login</a></div>
+        <div><a href="{{ path('app_register') }}">register</a></div>
+    {% endif %}
+</div>
+
+{% block body %}{% endblock %}
+
+
+</body>

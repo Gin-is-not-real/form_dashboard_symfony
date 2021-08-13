@@ -28,6 +28,10 @@
                     <li><a href="{{ path('manual_index') }}">Manual index</a></li>
                 </ul>
             </nav>
+
+            <div>
+                <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
         </header>
 
 <hr>
@@ -36,6 +40,7 @@
         <div>{{ e }}</div>
     {% endfor %}
 {% endif %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
