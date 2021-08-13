@@ -25,11 +25,13 @@ class ProductType extends AbstractType
             ->add('category')
             // ->add('manual')
             ->add('manual', FileType::class, [
-                // 'multiple' => true,
                 'mapped' => false,
                 'required' => false
             ])
-            ->add('receipt')
+            ->add('receipt', FileType::class, [
+                'mapped' => false,
+                'required' => false
+            ])
         ;
     }
 

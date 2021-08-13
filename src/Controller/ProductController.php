@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Manual;
+use App\Entity\Receipt;
+
 
 /**
  * @Route("/product")
@@ -56,6 +58,17 @@ class ProductController extends AbstractController
                 $product->setManual($man);
             }
 
+            $receipt = $form->get('receipt')->getData();
+            if($receipt != null) {
+                $receipt->move(
+                    $this->getParameter('upload_directory'),
+                    $filename = $receipt->getClientOriginalName()
+                );
+                $rec = new Receipt();
+                $rec->setName($filename);
+                $product->setReceipt($rec);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
@@ -92,7 +105,6 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //on recup le manual transmit
             $manual = $form->get('manual')->getData();
-
             if($manual != null) {
                 //on genere un nouveau nom de fichier
                 // $filename = md5(uniqid()) . '.' . $manual->guessExtension();
@@ -107,6 +119,18 @@ class ProductController extends AbstractController
                 $man->setName($filename);
                 $product->setManual($man);
             }
+
+            $receipt = $form->get('receipt')->getData();
+            if($receipt != null) {
+                $receipt->move(
+                    $this->getParameter('upload_directory'),
+                    $filename = $receipt->getClientOriginalName()
+                );
+                $rec = new Receipt();
+                $rec->setName($filename);
+                $product->setReceipt($rec);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
