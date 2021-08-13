@@ -3,7 +3,12 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+    <header class="section-header">
+        <h1>Product</h1>
+        <div>
+            <a href="{{ path('product_index') }}">back to list</a>
+        </div>
+    </header>
 
     <table class="table">
         <tbody>

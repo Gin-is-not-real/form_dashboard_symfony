@@ -6,23 +6,37 @@
         {# the CSS file lives at "public/css/style.css" #}
         <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
     </head>
-
 <body>
 
-
-<div>
+<header>
     <h1>Hello  ! </h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <div>
+        {% if app.user %}
+        <div>
+            You are logged in as {{ app.user.username }}
         </div>
-    {% endif %}
+        <div>
+            You can
+             <a href="{{ path('product_index') }}">Access the site</a>
+            or 
+            <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
 
-    {% if app.user == null %}
-        <div><a href="{{ path('app_login') }}">login</a></div>
-        <div><a href="{{ path('app_register') }}">register</a></div>
-    {% endif %}
-</div>
+        {% elseif app.user == null %}
+            <div>
+                You are not logged !
+            </div>
+            <div>
+                To access the site, you can
+                <a href="{{ path('app_login') }}">login</a>
+                or 
+                <a href="{{ path('app_register') }}">register</a>
+            </div>
+        {% endif %}
+
+    </div>
+</header>
+
 
 {% block body %}{% endblock %}
 

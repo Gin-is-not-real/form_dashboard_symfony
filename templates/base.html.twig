@@ -19,19 +19,23 @@
         {% endblock %}
     </head>
     <body>
-        <header>
+        <header id="general-header">
             <nav>
                 <ul>
-                    <li><a href="{{ path('product_index') }}">Products index</a></li>
-                    <li><a href="{{ path('category_index') }}">Categories index</a></li>
+                    <li><a href="{{ path('home') }}">Home</a></li>
+
+                    <li><a href="{{ path('product_index') }}">Products</a></li>
+                    <li><a href="{{ path('category_index') }}">Categories</a></li>
                     {# <li><a href="{{ path('receipt_index') }}">Receipt index</a></li> #}
                     {# <li><a href="{{ path('manual_index') }}">Manual index</a></li> #}
                     
-                    <li id="li-logout"><a href="{{ path('app_logout') }}">Logout</a></li>
+                    {# <li id="li-logout"><a href="{{ path('app_logout') }}">Logout</a></li> #}
                 </ul>
-
             </nav>
 
+            <div>
+                <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
 
         </header>
 
