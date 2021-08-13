@@ -18,9 +18,11 @@
             <tr>
                 <td>{{ manual.id }}</td>
                 <td>{{ manual.name }}</td>
-                <td>
+                <td class="td-actions">
                     <a href="{{ path('manual_show', {'id': manual.id}) }}">show</a>
                     <a href="{{ path('manual_edit', {'id': manual.id}) }}">edit</a>
+
+                    {{ include('manual/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

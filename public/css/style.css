@@ -19,8 +19,12 @@ li {
 }
 
 nav ul {
-    display: flex;
+    display: grid;
     gap: 4%;
+}
+
+#li-logout {
+    justify-self: right;
 }
 
 table {

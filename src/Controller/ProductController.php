@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Manual;
 use App\Entity\Receipt;
 
-
 /**
  * @Route("/product")
  */
@@ -50,7 +49,7 @@ class ProductController extends AbstractController
                 // $filename = md5(uniqid()) . '.' . $manual->guessExtension();
                 $filename = $manual->getClientOriginalName();
                 $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                if(strtolower($ext) == 'pdf') {
+                if(strtolower($ext) == 'pdf' || strtolower($ext) == 'png' || strtolower($ext) == 'jpg' || strtolower($ext) == 'gif') {
                     //On copie le fichier dans le dossier uploads
                     $manual->move(
                         $this->getParameter('upload_directory'), 

@@ -18,9 +18,14 @@
             <tr>
                 <td>{{ receipt.id }}</td>
                 <td>{{ receipt.name }}</td>
-                <td>
+                <td class="td-actions">
                     <a href="{{ path('receipt_show', {'id': receipt.id}) }}">show</a>
                     <a href="{{ path('receipt_edit', {'id': receipt.id}) }}">edit</a>
+
+                    {{ include('receipt/_delete_form.html.twig') }}
+
+                    {# <a href="{{ path('receipt_delete', {'id': receipt.id}) }}">delete</a> #}
+
                 </td>
             </tr>
         {% else %}
