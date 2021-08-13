@@ -40,7 +40,12 @@
                 <td>{{ product.advice }}</td>
                 <td>{{ product.purchaseDate ? product.purchaseDate|date('Y-m-d') : '' }}</td>
                 <td>{{ product.warrantyEndPurchase ? product.warrantyEndPurchase|date('Y-m-d') : '' }}</td>
-                <td>{{ product.manual }}</td>
+                {# <td>{{ product.manual }}</td> #}
+
+                {% if product.manual is defined %}
+                    <td><a href="{{ asset('uploads/' ~  product.manual.name ) }}" onclick="window.open(this.href); return false;">{{ product.manual.name }}</a></td>
+                {% endif %}
+
                 <td>{{ product.receipt }}</td>
 
                 <td>

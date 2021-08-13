@@ -106,6 +106,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
+    },
     "monolog/monolog": {
         "version": "2.3.2"
     },
@@ -633,6 +636,12 @@
         "version": "1.2.1"
     },
     "twig/extra-bundle": {
+        "version": "v3.3.1"
+    },
+    "twig/inky-extra": {
+        "version": "v3.3.0"
+    },
+    "twig/markdown-extra": {
         "version": "v3.3.1"
     },
     "twig/twig": {
