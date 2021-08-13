@@ -35,6 +35,8 @@ class ProductController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $error = null;
+
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -47,26 +49,39 @@ class ProductController extends AbstractController
                 //on genere un nouveau nom de fichier
                 // $filename = md5(uniqid()) . '.' . $manual->guessExtension();
                 $filename = $manual->getClientOriginalName();
-                //On copie le fichier dans le dossier uploads
-                $manual->move(
-                    $this->getParameter('upload_directory'), 
-                    $filename
-                );
-                //on creer le manual dans la base
-                $man = new Manual();
-                $man->setName($filename);
-                $product->setManual($man);
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                if(strtolower($ext) == 'pdf') {
+                    //On copie le fichier dans le dossier uploads
+                    $manual->move(
+                        $this->getParameter('upload_directory'), 
+                        $filename
+                    );
+                    //on creer le manual dans la base
+                    $man = new Manual();
+                    $man->setName($filename);
+                    $product->setManual($man);
+                }
+                else {
+                    $pdf_error = 'The manual could not be uploaded because it is not a pdf file';
+                }
             }
 
             $receipt = $form->get('receipt')->getData();
             if($receipt != null) {
-                $receipt->move(
-                    $this->getParameter('upload_directory'),
-                    $filename = $receipt->getClientOriginalName()
-                );
-                $rec = new Receipt();
-                $rec->setName($filename);
-                $product->setReceipt($rec);
+                $filename = $receipt->getClientOriginalName();
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                if(strtolower($ext) == 'png' || strtolower($ext) == 'jpg' || strtolower($ext) == 'gif') {
+                    $receipt->move(
+                        $this->getParameter('upload_directory'),
+                        $filename
+                    );
+                    $rec = new Receipt();
+                    $rec->setName($filename);
+                    $product->setReceipt($rec);
+                }
+                else {
+                    $img_error = 'The receipt could not be uploaded because it is not a pdf file';
+                }
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -74,8 +89,7 @@ class ProductController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('product_index', [
-            'error' => $manual,
-        ], Response::HTTP_SEE_OTHER);
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [

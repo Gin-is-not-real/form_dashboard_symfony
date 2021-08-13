@@ -3,7 +3,11 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
+
     <h1>Product index</h1>
+        {% if error is defined %}
+        <div>ERROR: {{ error }} </div>
+    {% endif %}
 
     <table class="table">
         <thead>
