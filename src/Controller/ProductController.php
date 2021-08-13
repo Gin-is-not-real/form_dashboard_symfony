@@ -8,7 +8,12 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+
+use App\Entity\Manual;
+use App\Entity\Receipt;
+
 
 /**
  * @Route("/product")
@@ -35,11 +40,42 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on recup le manual transmit
+            $manual = $form->get('manual')->getData();
+
+            if($manual != null) {
+                //on genere un nouveau nom de fichier
+                // $filename = md5(uniqid()) . '.' . $manual->guessExtension();
+                $filename = $manual->getClientOriginalName();
+                //On copie le fichier dans le dossier uploads
+                $manual->move(
+                    $this->getParameter('upload_directory'), 
+                    $filename
+                );
+                //on creer le manual dans la base
+                $man = new Manual();
+                $man->setName($filename);
+                $product->setManual($man);
+            }
+
+            $receipt = $form->get('receipt')->getData();
+            if($receipt != null) {
+                $receipt->move(
+                    $this->getParameter('upload_directory'),
+                    $filename = $receipt->getClientOriginalName()
+                );
+                $rec = new Receipt();
+                $rec->setName($filename);
+                $product->setReceipt($rec);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('product_index', [
+            'error' => $manual,
+        ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [
@@ -67,6 +103,34 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on recup le manual transmit
+            $manual = $form->get('manual')->getData();
+            if($manual != null) {
+                //on genere un nouveau nom de fichier
+                // $filename = md5(uniqid()) . '.' . $manual->guessExtension();
+
+                //On copie le fichier dans le dossier uploads
+                $manual->move(
+                    $this->getParameter('upload_directory'), 
+                    $filename = $manual->getClientOriginalName()
+                );
+                //on creer le manual dans la base
+                $man = new Manual();
+                $man->setName($filename);
+                $product->setManual($man);
+            }
+
+            $receipt = $form->get('receipt')->getData();
+            if($receipt != null) {
+                $receipt->move(
+                    $this->getParameter('upload_directory'),
+                    $filename = $receipt->getClientOriginalName()
+                );
+                $rec = new Receipt();
+                $rec->setName($filename);
+                $product->setReceipt($rec);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
@@ -90,5 +154,31 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/delete/manual/{id}", name="product_delete_manual", methods={"DELETE"})
+     */
+    public function deleteManual(Manual $manual, Request $request) {
+        $data = json_decode($request->getContent(), true);
+
+        //on verifir si le token est valide
+        if($this->isCsrfTokenValid('delete'.$manual->getId(), $data['_token'])) {
+            //on recupere le nom du fichier
+            $name = $manual->getName();
+            //on supprime le fichier
+            unlink($this->getParameter('upload_directory') . '/' . $name);
+
+            // On supprime l'entrée de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($manual);
+            $em->flush();
+
+        // On répond en json
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
+            
     }
 }

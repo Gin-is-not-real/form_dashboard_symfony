@@ -45,11 +45,21 @@
             </tr>
             <tr>
                 <th>Manual</th>
-                <td>{{ product.manual }}</td>
+                <td>
+                    {% if product.manual != null %}
+                        <a href="{{ asset('uploads/' ~  product.manual.name ) }}" onclick="window.open(this.href); return false;">{{ product.manual }}</a>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Receipt</th>
-                <td>{{ product.receipt }}</td>
+                <td>
+                    {% if product.receipt != null %}
+                        <a href="{{ asset('uploads/' ~  product.receipt.name ) }}" onclick="window.open(this.href); return false;">{{ product.receipt.name }}</a>
+                    {% endif %}
+                
+                </td>
+
             </tr>
         </tbody>
     </table>

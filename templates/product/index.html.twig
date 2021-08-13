@@ -40,8 +40,19 @@
                 <td>{{ product.advice }}</td>
                 <td>{{ product.purchaseDate ? product.purchaseDate|date('Y-m-d') : '' }}</td>
                 <td>{{ product.warrantyEndPurchase ? product.warrantyEndPurchase|date('Y-m-d') : '' }}</td>
-                <td>{{ product.manual }}</td>
-                <td>{{ product.receipt }}</td>
+                {# <td>{{ product.manual }}</td> #}
+
+                <td>
+                    {% if product.manual != null %}
+                        <a href="{{ asset('uploads/' ~  product.manual.name ) }}" onclick="window.open(this.href); return false;">{{ product.manual.name }}</a>
+                    {% endif %}
+                </td>
+                {# <td>{{ product.receipt }}</td> #}
+                <td>
+                    {% if product.receipt != null %}
+                        <a href="{{ asset('uploads/' ~  product.receipt.name ) }}" onclick="window.open(this.href); return false;">{{ product.receipt.name }}</a>
+                    {% endif %}
+                </td>
 
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>

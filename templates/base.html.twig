@@ -9,11 +9,13 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
+            {# <link href="{{ asset('css/style.css') }}" rel="stylesheet"/> #}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
+            <script src="{{ asset('js/delete.js') }}"></script>
         {% endblock %}
     </head>
     <body>
@@ -29,6 +31,11 @@
         </header>
 
 <hr>
+{% if error is defined %}
+    {% for e in error %}
+        <div>{{ e }}</div>
+    {% endfor %}
+{% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>
