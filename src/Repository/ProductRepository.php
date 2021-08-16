@@ -22,6 +22,19 @@ class ProductRepository extends ServiceEntityRepository
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
+    // public function findByEndDate(): array {
+    //     $entityManager = $this->getEntityManager();
+
+    //     $query = $entityManager->createQuery(
+    //         'SELECT prod 
+    //         From App\Entity\product prod
+    //         WHERE prod.warranty_end_purchase
+    //         ORDER BY prod.warranty_end_purchase DESC'
+    //     );
+
+    //     return $query->getResult();
+    // }
+
     /*
     public function findByExampleField($value)
     {

@@ -22,10 +22,22 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="product_index", methods={"GET"})
      */
+    // public function index(ProductRepository $productRepository): Response
+    // {
+    //     return $this->render('product/index.html.twig', [
+    //         'products' => $productRepository->findAll(),
+    //     ]);
+    // }
+
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            // 'products' => $productRepository->findAll(),
+            'products' => $productRepository->findBy(
+                [], 
+                ['warranty_end_purchase' => 'ASC']
+            )
+
         ]);
     }
 
