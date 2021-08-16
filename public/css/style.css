@@ -131,9 +131,12 @@ th {
     background-color: var(--thead-bg);
     border-radius: 2px;
 }
+
 tr {
     height: max-content;
     border-radius: 2px;
+}
+.tr-order td {
 }
 tr:hover {
     background-color: rgba(255, 255, 255, 0.83);
@@ -189,6 +192,12 @@ input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, tex
 
 button {
     margin: 2%;
+}
+
+.btn-order {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
 }
 
 .btn-round {

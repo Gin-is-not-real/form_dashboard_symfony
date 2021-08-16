@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+
 use App\Entity\Manual;
 use App\Entity\Receipt;
 
@@ -39,6 +41,21 @@ class ProductController extends AbstractController
             )
 
         ]);
+    }
+
+    /**
+     * @Route("/order/{field}/{order}", name="product_order", methods={"GET", "POST"})
+     */
+    public function orderBy(ProductRepository $productRepository, string $field, string $order): Response {
+        $column = $field;
+        $ord = $order;
+
+        return $this->render('product/index.html.twig', [
+            'products' => $productRepository->findBy(
+                [], 
+                [$column => $ord]
+            )
+            ]);
     }
 
     /**

@@ -184,4 +184,9 @@ LOGIN
     - *Entity/User.php 
         - j'ai modifier la fonction getRoles afin que chaque nouvel User soit admin, mais ?
         - j'ai attribué la valeur admin a la variable $role de la classe. 
+
+
+FILTRE INDEX 
+
+    symfony console make:twig-extension
 ///////////////////////////////////////////////////

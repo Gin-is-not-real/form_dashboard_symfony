@@ -30,6 +30,45 @@
 
                     <th>actions</th>
                 </tr>
+                <tr class="tr-order">
+                    {# <td>{{ product.id }}</td> #}
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'name', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'name', 'order': 'DESC'}) }}">v</a></button>
+                    </td>
+                    <td>
+                    {# <button class='btn-order'><a href="{{ path('product_order', {'field': 'category'}) }}">^</a></button> #}
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'ref', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'ref', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'price', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'price', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'advice', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'advice', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'purchase_date', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'purchase_date', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'warranty_end_purchase', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'warranty_end_purchase', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'manual', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'manual', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'receipt', 'order': 'ASC'}) }}">^</a></button>
+                        <button class='btn-order'><a href="{{ path('product_order', {'field': 'receipt', 'order': 'DESC'}) }}"> v </a></button>
+                    </td>
+                    <td></td>
+                </tr>
             </thead>
             <tbody>
             {% for product in products %}
