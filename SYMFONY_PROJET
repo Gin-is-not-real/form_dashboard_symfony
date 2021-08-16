@@ -1,0 +1,187 @@
+///////////////////////////////////////////////////
+TODO:
+    - faire une interface pour definir les roles
+    - faire un dashboard par user ?
+
+    - verifier les extensions lors de l'upload: pdf pour manual et imgs pour receipt
+        $ext = pathinfo($nomfichier, PATHINFO_EXTENSION);
+
+        if(strtolower($ext) != ‘jpg’ || strtolower($ext) != ‘gif’) {
+        echo « Format de fichier incorrect : vous devez utiliser un format .jpg ou .gif :<br />
+        merci de revenir en arrière et de choisir une image conforme »;
+        exit;
+        }
+    **les fichiers avec la mauvaise extension ne s'uploadent pas, mais je n'arrive pas afficher les error
+
+    - delete des fichiers 
+    - telecharger les images (pdf ok)
+
+    - modifier templates des index:
+        - ne pas faire un tableau classique
+
+    
+
+///////////////////////////////////////////////////
+//  PROJET 2
+
+    symfony new {name} --full
+    cd {name}
+    git init 
+    symfony server:start
+    symfony open:local
+
+    *modification du .env et .env.test
+
+    php bin/console doctrine:database:create 
+
+///////////////////////////////////////////////////
+////    ENTITIES
+
+    php bin/console make:entity
+        Product, 
+            name, str, 255, no 
+            ref, str, 255, no 
+            price, float, no 
+            advice, str, no 
+            purchase_date, date, no
+            warranty_en_date, date, no
+
+    php bin/console make:entity
+        Category
+            name, str, no , y
+
+    php bin/console make:entity
+        Manual
+            name, str, yes , y
+
+    php bin/console make:entity
+        Receipt
+            name, str, no , y
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate
+
+///////////////////////////////////////////////////
+////    RELATION
+
+    php bin/console make:entity Product
+        category, relation, Category, ManyToMany, no, *add a new prop to Category ? -> yes, products, no
+
+    php bin/console make:entity Product
+        manual, relation, Manual, OneToOne, yes, *add a new prop to Manual ? -> no
+
+    php bin/console make:entity Product
+        receipt, relation, Receipt, OneToOne, yes, *add a new prop to Receipt ? -> no
+
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
+
+    php bin/console make:crud 
+    Product, enter
+
+    -> il faut implémenter la function __toString() dans les entitées liée:
+        *Category.php:
+            public function __toString() {
+                return $this->name;
+            }
+
+    php bin/console make:crud 
+        Category, enter
+
+    php bin/console make:crud 
+        Manual, enter
+
+    php bin/console make:crud 
+        Receipt, enter
+
+///////////////////////////////////////////////////
+////
+    -rajouté un header dans le template de base avec les liens vers les index de chaque entités
+
+    - j'ai modifié le template index de produits pour qu'il affiche les cat, manual et receipt
+
+    - j'ai ajouté le coretype textarea dans le champ advice du form produit
+
+    - *product/index 
+        - forin sur les category
+
+    - link stylesheet via asset
+        composer require symfony/asset
+        <link href="{{ asset('css/test.css') }}" rel="stylesheet"/>
+
+///////////////////////////////////////////////////
+////    UPLOAD, DELETE
+
+    php bin/console doctrine:migrations:diff
+        *no changes
+
+    - *ProductType   
+        - modification du champ manual: FileType non mapped
+        
+    - *config/services.yaml
+        parameters:
+            upload_directory: '%kernel.project_dir%/public/uploads'
+
+    - *ProductController:
+        - modifier les fonction new et edit
+        - creer fonction deleteManual
+
+        *
+    - lier fichier js via block (Encore)
+        composer require symfony/webpack-encore-bundle
+
+    JSON
+        composer require admin
+        * erreur lors des liens avec le fichier css et js a cause d'un erreur "manifestQ.json not find"
+            -> *packages/asset: modifier le chemin
+                json_manifest_path: '%kernel.project_dir%/public/bundles/easyadmin/manifest.json'
+
+
+    **pb avec le DELETE
+        Unallowed method, allowed DELETE
+///////////////////////////////////////////////////
+    - telecharger le manuel 
+        *product index
+            <td>
+                {% if product.manual != null %}
+                    <a href="{{ asset('uploads/' ~  product.manual ) }}" onclick="window.open(this.href); return false;">{{ product.manual }}</a>
+                {% endif %}
+            </td>
+
+UPLOAD RECEIPT 
+    - *ProductController:
+        - modifier les fonction new et edit, show
+
+    - *ProductType   
+        - modification du champ reciept: FileType non mapped
+
+    - *_form product 
+        - ajout if pour afficher et dl 
+        - ajout partie attachement pour afficher les fichiers ajouter le lien pour dl
+
+**MERGED
+    - ajout des test pour les extensions autorisées lors de l'upload des fichiers
+
+LOGIN 
+
+    php bin/console make:user
+        User, yes, email, yes
+
+    php bin/console make:auth 
+        1, LoginFormAuthenticator, SecurityController, yes
+
+     - Finish the redirect "TODO" in the App\Security\LoginAuthenticator::onAuthenticationSuccess() method.
+
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
+
+    - *config/packages/security.yaml
+        - j'ai decommenté la premiere ligne de acces_control et changé le path
+            -> { path: ^/product, roles: ROLE_ADMIN }
+
+    - j'ai modifier les roles dans la base
+        
+    - *Entity/User.php 
+        - j'ai modifier la fonction getRoles afin que chaque nouvel User soit admin, mais ?
+        - j'ai attribué la valeur admin a la variable $role de la classe. 
+///////////////////////////////////////////////////

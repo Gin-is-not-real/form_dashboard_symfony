@@ -3,6 +3,7 @@
 {% block title %}Edit Product{% endblock %}
 
 {% block body %}
+<div class="my-container">
     <header>
         <div>
             <a href="{{ path('product_index') }}">back to list</a>
@@ -13,4 +14,5 @@
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
     {{ include('product/_delete_form.html.twig') }}
+</div>
 {% endblock %}

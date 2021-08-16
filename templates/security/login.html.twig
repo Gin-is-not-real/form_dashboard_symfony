@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form class="form-login" method="post">
+<form class="form-login form-container" method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -39,8 +39,9 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    <div>
+        <button class="btn btn-lg btn-primary btn-round" type="submit">
+        Sign in</button>
+    </div>
 </form>
 {% endblock %}
