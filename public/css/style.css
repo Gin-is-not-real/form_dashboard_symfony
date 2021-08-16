@@ -37,6 +37,10 @@ header, h1 {
     padding: 2%;
 }
 
+#home-header > div > div {
+    padding-bottom: 1%;
+}
+
 .footer-actions {
     display: flex;
     align-items: center;
@@ -77,6 +81,9 @@ label {
 
 .attachments {
     padding-top: 2%;
+}
+.attachments > div {
+    padding-bottom: 2%;
 }
 
 /* table */
