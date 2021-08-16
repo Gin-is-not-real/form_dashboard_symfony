@@ -137,6 +137,7 @@ tr {
     border-radius: 2px;
 }
 .tr-order td {
+    padding: 0;
 }
 tr:hover {
     background-color: rgba(255, 255, 255, 0.83);
@@ -168,6 +169,9 @@ nav ul {
 a {
     color: black;
     margin: 1%;
+}
+.backlink-container {
+    margin-top: 2%;
 }
 a:hover {
     text-shadow: 1px 1px 5px white;

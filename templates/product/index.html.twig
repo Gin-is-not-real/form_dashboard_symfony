@@ -16,28 +16,15 @@
     <div style="overflow-x:auto;">
         <table class="table">
             <thead>
-                <tr>
-                    {# <th>Id</th> #}
-                    <th>Name</th>
-                    <th>Categories</th>
-                    <th>Ref</th>
-                    <th>Price</th>
-                    <th>Advice</th>
-                    <th>Purchase date</th>
-                    <th>Warranty end</th>
-                    <th>Manual</th>
-                    <th>Receipt</th>
-
-                    <th>actions</th>
-                </tr>
-                <tr class="tr-order">
+                    <tr class="tr-order">
                     {# <td>{{ product.id }}</td> #}
                     <td>
                         <button class='btn-order'><a href="{{ path('product_order', {'field': 'name', 'order': 'ASC'}) }}">^</a></button>
                         <button class='btn-order'><a href="{{ path('product_order', {'field': 'name', 'order': 'DESC'}) }}">v</a></button>
                     </td>
                     <td>
-                    {# <button class='btn-order'><a href="{{ path('product_order', {'field': 'category'}) }}">^</a></button> #}
+                    {# <button class='btn-order'><a href="{{ path('product_order', {'field': 'category', 'order': 'DESC'}) }}">^</a></button> #}
+                    </td>
                     <td>
                         <button class='btn-order'><a href="{{ path('product_order', {'field': 'ref', 'order': 'ASC'}) }}">^</a></button>
                         <button class='btn-order'><a href="{{ path('product_order', {'field': 'ref', 'order': 'DESC'}) }}"> v </a></button>
@@ -68,6 +55,21 @@
                         <button class='btn-order'><a href="{{ path('product_order', {'field': 'receipt', 'order': 'DESC'}) }}"> v </a></button>
                     </td>
                     <td></td>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Ref</th>
+                    <th>Price</th>
+                    <th>Advice</th>
+                    <th>Purchase date</th>
+                    <th>Warranty end</th>
+                    <th>Manual</th>
+                    <th>Receipt</th>
+
+                    <th>actions</th>
+                </tr>
+
                 </tr>
             </thead>
             <tbody>

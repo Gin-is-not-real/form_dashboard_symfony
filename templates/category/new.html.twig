@@ -3,9 +3,15 @@
 {% block title %}New Category{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
+<div  class="backlink-container">
+    <a href="{{ path('category_index') }}">back to list</a>
+</div>
+
+<div class="my-container">
+    <header>
+        <h1>Create new Category</h1>
+    </header>
 
     {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
+</div>
 {% endblock %}

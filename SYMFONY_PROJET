@@ -187,6 +187,5 @@ LOGIN
 
 
 FILTRE INDEX 
-
-    symfony console make:twig-extension
+    - ajout de la fonction orderBy(field, order) dans le prodController et de bouton ^ v dans le template
 ///////////////////////////////////////////////////
