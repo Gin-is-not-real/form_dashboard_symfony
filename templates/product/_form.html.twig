@@ -2,6 +2,7 @@
     {{ form_widget(form) }}
 
     {% if app.request.attributes.get('_route') == 'product_edit' %}
+        <div class="attachments">
             <h2>Attachments</h2>
             {% if product.manual != null %}
                 <h3>Manual</h3>
@@ -20,7 +21,7 @@
                     {# <a href="{{ path('product_delete_receipt', {id: product.receipt.id})}}" data-delete data-token="{{ csrf_token('delete' ~ product.receipt.id ) }}">Delete</a> #}
                 </div>
             {% endif %}
-        {% endif %}
-
+        <div>
+    {% endif %}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -8,33 +8,104 @@ html * {
 }
 
 html {
+    --trans-bluegrey: rgba(128, 128, 128, 0.33);
+    --trans-green: rgba(51, 111, 51, 0.371);
+    --trans-red: rgba(111, 55, 51, 0.371);
+
+    --general-bg: var(--trans-bluegrey);
+    --thead-bg: rgba(151, 62, 55, 0.371);
+    --tcell-bg: rgba(51, 111, 51, 0.371);
+
     font-family: 'Rubik', sans-serif;
     /* font-family: 'Exo 2', sans-serif; */
-}
+    background-color: var(--general-bg);
 
+}
 
 #general-header {
-    background-color: grey;
+    padding: 3%;
+    background-color: var(--general-bg);
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
 }
-body {
 
+header {
+    width: 100%;
 }
 header, h1 {
     padding: 2%;
 }
 
-a {
-    color: black;
+.footer-actions {
+    display: flex;
+    align-items: center;
 }
 
-li {
-    list-style: none;
+/* form */
+form {
+    margin: 2%;
 }
-header {
-    width: 100vw;
+form > div {
+    width: 60vw;
+    padding: 2%;
+
+    background-color: var(--trans-bluegrey);
+    
+    border-radius: 1px;
+}
+
+.form-login>div {
+    width: 50vw;
+
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 2%;
+}
+
+form>div>div {
     display: flex;
     justify-content: space-between;
 }
+
+label {
+    width: 20vw;
+}
+
+.attachments {
+    padding-top: 2%;
+}
+
+/* table */
+
+table {
+    margin: 2%;
+    /* border: 1px solid black; */
+}
+
+th {
+    padding: 10px 15px;
+    background-color: var(--thead-bg);
+}
+td {
+    height: 100%;
+
+    background-color: var(--tcell-bg);
+    text-align: center;
+    padding: 10px 15px;
+}
+tr {
+    height: max-content;
+}
+.td-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* elements */
 nav {
     width: 50%;
 }
@@ -43,26 +114,52 @@ nav ul {
     justify-content: space-between;
     /* gap: 4%; */
 }
+a {
+    color: black;
+    margin: 1%;
+}
 
-table {
+li {
+    list-style: none;
+}
+
+/* inputs */
+button {
     margin: 2%;
-    border: 1px solid black;
 }
-td {
-    background-color: rgb(51, 111, 51);
+.btn-round {
+    border-radius: 100%;
+    border: none;
+
+    text-transform: uppercase;
+    font-family: 'Rubik', sans-serif;
+
+    font-weight: 500;
+
+    width: 60px;
+    height: 60px;
 }
-th {
-    padding: 10px;
-    background-color: brown;
+.btn-round:hover {
+    box-shadow: 1px 1px grey;
 }
 
-form>div {
-    width: 50vw;
-    border: 1px solid black;
+.btn-min {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
 }
-form>div>div {
-    display: flex;
+
+.btn-delete {
+    margin: 1%;
+    background-color: rgba(202, 35, 35, 0.7);
 }
-label {
-    width: 20vw;
+.btn-edit {
+    background-color: rgba(202, 121, 35, 0.713);
 }
+.btn-show {
+    background-color: rgba(55, 94, 35, 0.713);
+}
+
+
+

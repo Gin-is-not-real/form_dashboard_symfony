@@ -3,76 +3,82 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
+    <header>
+        <h1>Product index</h1>
+        <div>
+            <a href="{{ path('product_new') }}">Create new</a>
+        </div>
+    </header>
 
-    <h1>Product index</h1>
         {# {% if error is defined %}
         <div>ERROR: {{ error }} </div>
         {% endif %} #}
+    <div style="overflow-x:auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Ref</th>
+                    <th>Price</th>
+                    <th>Advice</th>
+                    <th>Purchase date</th>
+                    <th>Warranty end</th>
+                    <th>Manual</th>
+                    <th>Receipt</th>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Categories</th>
-                <th>Ref</th>
-                <th>Price</th>
-                <th>Advice</th>
-                <th>Purchase_date</th>
-                <th>Warranty_end_purchase</th>
-                <th>Manual</th>
-                <th>Receipt</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    {# <td>{{ product.id }}</td> #}
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <ul>
+                            {% for cat in product.category %}
+                                <li>{{ cat }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
 
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>
-                    <ul>
-                        {% for cat in product.category %}
-                            <li>{{ cat }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
+                    <td>{{ product.ref }}</td>
+                    <td>{{ product.price }} €</td>
+                    <td>{{ product.advice }}</td>
+                    <td>{{ product.purchaseDate ? product.purchaseDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ product.warrantyEndPurchase ? product.warrantyEndPurchase|date('Y-m-d') : '' }}</td>
+                    {# <td>{{ product.manual }}</td> #}
 
-                <td>{{ product.ref }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.advice }}</td>
-                <td>{{ product.purchaseDate ? product.purchaseDate|date('Y-m-d') : '' }}</td>
-                <td>{{ product.warrantyEndPurchase ? product.warrantyEndPurchase|date('Y-m-d') : '' }}</td>
-                {# <td>{{ product.manual }}</td> #}
+                    <td>
+                        {% if product.manual != null %}
+                            <a href="{{ asset('uploads/' ~  product.manual.name ) }}" onclick="window.open(this.href); return false;">{{ product.manual.name }}</a>
+                        {% endif %}
+                    </td>
+                    {# <td>{{ product.receipt }}</td> #}
+                    <td>
+                        {% if product.receipt != null %}
+                            <a href="{{ asset('uploads/' ~  product.receipt.name ) }}" onclick="window.open(this.href); return false;">
+                                <img src="{{ asset('uploads/' ~  product.receipt.name ) }}" alt="" width="50px" height="auto" >
+                            </a>
+                        {% endif %}
+                    </td>
 
-                <td>
-                    {% if product.manual != null %}
-                        <a href="{{ asset('uploads/' ~  product.manual.name ) }}" onclick="window.open(this.href); return false;">{{ product.manual.name }}</a>
-                    {% endif %}
-                </td>
-                {# <td>{{ product.receipt }}</td> #}
-                <td>
-                    {% if product.receipt != null %}
-                        <a href="{{ asset('uploads/' ~  product.receipt.name ) }}" onclick="window.open(this.href); return false;">
-                            <img src="{{ asset('uploads/' ~  product.receipt.name ) }}" alt="" width="50px" height="auto" >
-                        </a>
-                    {% endif %}
-                </td>
+                    <td class="td-actions">
+                        <button class="btn-round btn-show btn-min"><a href="{{ path('product_show', {'id': product.id}) }}">show</a></button>
 
-                <td class="td-actions">
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                    {{ include('product/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <button class="btn-round btn-edit btn-min"><a href="{{ path('product_edit', {'id': product.id}) }}">edit</a></button>
 
-    <a href="{{ path('product_new') }}">Create new</a>
+                        {{ include('product/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

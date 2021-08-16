@@ -3,7 +3,12 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+        <header>
+        <h1>Category index</h1>
+        <div>
+            <a href="{{ path('category_new') }}">Create new</a>
+        </div>
+    </header>
 
     <table class="table">
         <thead>
@@ -18,9 +23,11 @@
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
+
                 <td class="td-actions">
-                    <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                    <button class="btn-round btn-show btn-min"> <a href="{{ path('category_show', {'id': category.id}) }}">show</a></button>
+
+                    <button class="btn-round btn-edit btn-min"><a href="{{ path('category_edit', {'id': category.id}) }}">edit</a></button>
 
                     {{ include('category/_delete_form.html.twig') }}
 
@@ -33,6 +40,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('category_new') }}">Create new</a>
 {% endblock %}
