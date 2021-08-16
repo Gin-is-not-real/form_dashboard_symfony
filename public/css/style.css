@@ -14,7 +14,7 @@ html {
 
     --general-bg: var(--trans-bluegrey);
     --thead-bg: rgba(151, 62, 55, 0.371);
-    --thead-bg: rgba(26, 6, 4, 0.53);
+    --thead-bg: rgba(26, 6, 4, 0.47);
 
     --tcell-bg: rgba(51, 111, 51, 0.371);
     --tcell-bg: rgba(38, 40, 38, 0.37);
@@ -35,7 +35,7 @@ html {
     justify-content: space-between;
 }
 #general-header a:hover {
-    text-shadow: 1px 1px 1px 3px seashell;
+    text-shadow: 1px 1px 5px white;
 }
 
 header {
@@ -47,6 +47,9 @@ header, h1 {
 
 #home-header  {
     background-color: var(--general-bg);
+}
+#home-header h1 {
+    padding: 2% 0;
 }
 #home-header > div > div {
     padding-bottom: 1%;
@@ -163,17 +166,25 @@ a {
     color: black;
     margin: 1%;
 }
+a:hover {
+    text-shadow: 1px 1px 5px white;
+}
+
 
 li {
     list-style: none;
 }
 
 /* inputs */
-input[type=text], textarea, option {
+input[type=text], input[type=email], input[type=password], textarea, option {
     padding: 1%;
     font-family: 'Rubik', sans-serif;
     border-radius: 10px;
     border: none;
+}
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, textarea:hover, option:hover {
+    box-shadow: 1px 1px 5px white;
+    
 }
 
 button {
